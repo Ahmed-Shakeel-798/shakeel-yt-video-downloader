@@ -1,0 +1,21 @@
+{
+  "name": "yt-video-downloader",
+  "version": "1.0.0",
+  "description": "A program to download videos from youtube",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "nodemon index.js"
+  },
+  "author": "Ahmed Shakeel",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15",
+    "readline-sync": "^1.4.10",
+    "ytdl-core": "^4.9.2"
+  }
+}
