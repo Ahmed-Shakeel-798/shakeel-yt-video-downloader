@@ -26,5 +26,13 @@ router.get('/downloadVideo', async (req, res) => {
     }
 });
 
-// filter: format => format.itag === itag
+// downloading audio only
+router.get('/downloadAudio', async (req, res) => {
+    try {
+        return ytDownloadController.downloadAudio(req, res);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+});
+
 module.exports = router;
