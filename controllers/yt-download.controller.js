@@ -17,30 +17,16 @@ const tracker = {
 
 
 class YtDownloadController {
-    constructor() {
-        
-    }
+    constructor() {}
 
     // Get info about video
     async getVideoInfo(URL) {
 
         // Get info about the video
         let info = await ytdl.getInfo(URL);  
-
-        // Parse that info
-        let formats = info.player_response.streamingData.formats;
-
-        let parsedFormats = [];
         
-        for (const format of formats) {
-            parsedFormats.push({
-                itag: format.itag,
-                quality: format.qualityLabel,
-                bitrate: format.bitrate,
-                format: format.mimeType.substring(0,format.mimeType.indexOf('/')),
-                ext: format.mimeType.substring(format.mimeType.indexOf('/')+1,format.mimeType.indexOf(';')),
-            })
-        }
+        // Parse that information
+        let parsedFormats = [];
         
         let adaptiveFormats = info.player_response.streamingData.adaptiveFormats;
         for (const format of adaptiveFormats) {
@@ -78,8 +64,9 @@ class YtDownloadController {
           tracker.video = { downloaded, total };
       });
 
-      // Get the progress bar going
       console.log(chalk.bgWhite.green(`Video Title: ${name}`));
+
+      // Get the progress bar going
       const progressbar = setInterval(() => {
         readline.cursorTo(process.stdout, 0);
         const toMB = i => (i / 1024 / 1024).toFixed(2);
@@ -123,7 +110,6 @@ class YtDownloadController {
         clearInterval(progressbar);
         console.log('done');
       });
-
 
 
       // Link streams
