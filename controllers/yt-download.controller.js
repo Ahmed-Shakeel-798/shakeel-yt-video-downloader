@@ -120,6 +120,17 @@ class YtDownloadController {
       res.header('Content-Disposition', `attachment; filename="${name}.${ext}"`);
       ffmpegProcess.stdio[5].pipe(res);
     }
+
+    // DownloadAudioOnly
+    async downloadAudio(req, res) {
+      const URL = req.query.URL;
+      const name = req.query.name.split(' ').join('_');
+      const aItag = Number(req.query.aItag);
+      const ext = req.query.ext;
+
+      res.header('Content-Disposition', `attachment; filename="${name}.${ext}"`);
+      ytdl(URL, { filter: 'audioonly', quality: aItag} ).pipe(res);
+    }
 }
 
 module.exports = YtDownloadController;
