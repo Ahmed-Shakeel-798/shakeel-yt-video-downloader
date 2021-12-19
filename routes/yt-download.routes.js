@@ -27,9 +27,9 @@ router.get('/downloadVideo', async (req, res) => {
 });
 
 // downloading audio only
-router.get('/downloadAudio', async (req, res) => {
+router.get('/downloadSingleFormat', async (req, res) => {
     try {
-        return ytDownloadController.downloadAudio(req, res);
+        return ytDownloadController.downloadSingleFormat(req, res);
     } catch (error) {
         res.status(400).send({ error: error.message })
     }

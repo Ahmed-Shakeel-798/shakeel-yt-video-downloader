@@ -32,7 +32,8 @@ class YtDownloadController {
         for (const format of adaptiveFormats) {
           parsedFormats.push({
             itag: format.itag,
-            quality: format.qualityLabel,
+            quality: format.quality,
+            qualityLablel: format.qualityLabel,
             bitrate: format.bitrate,
             format: format.mimeType.substring(0,format.mimeType.indexOf('/')) + ' only',
             ext: format.mimeType.substring(format.mimeType.indexOf('/')+1,format.mimeType.indexOf(';')),
@@ -122,14 +123,14 @@ class YtDownloadController {
     }
 
     // DownloadAudioOnly
-    async downloadAudio(req, res) {
+    async downloadSingleFormat(req, res) {
       const URL = req.query.URL;
       const name = req.query.name.split(' ').join('_');
-      const aItag = Number(req.query.aItag);
+      const itag = Number(req.query.aItag);
       const ext = req.query.ext;
 
       res.header('Content-Disposition', `attachment; filename="${name}.${ext}"`);
-      ytdl(URL, { filter: 'audioonly', quality: aItag} ).pipe(res);
+      ytdl(URL, { filter: 'audioonly', quality: itag} ).pipe(res);
     }
 }
 
